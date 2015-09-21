@@ -11,7 +11,8 @@ from models import (Catalog,
                     Instructor,
                     Schedule,
                     Meeting,
-                    CRN)
+                    CRN,
+                    Term)
 
 def parse_catalog(catalog_dict):
     catalog = Catalog()
@@ -34,6 +35,7 @@ def parse_course(course_dict):
 
     course.type = parse_course_info(course_dict.get('catalog:genustype'), Type)
     course.location = parse_course_info(course_dict.get('catalog:location'), Location)
+    course.term = parse_course_info(course_dict.get('catalog:term'), Term)
     course.schedule = parse_schedule(course_dict.get('catalog:schedule'))
     course.crn = parse_crn(course_dict.get('catalog:property'))
 
@@ -64,7 +66,6 @@ def parse_course(course_dict):
     return course
 
 def parse_course_info(topic_dict, klass):
-    print topic_dict, klass
     if isinstance(topic_dict, str) or isinstance(topic_dict, unicode):
         return klass(raw_id=topic_dict)
 

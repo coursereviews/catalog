@@ -19,29 +19,9 @@ class Catalog(object):
     def type_ids(self):
         return map(lambda i: i.id, self.types)
 
-class Term(object):
-    def __init__(self, raw_id=None, code=None):
-
-        self.link = link
-        self.rawid = raw_id
-        self.courses = []
-
-    @property
-    def season(self):
-        return {'90': 'fall',
-                '10': 'winter',
-                '20': 'spring'}.get(self.rawid[4:], 'unknown')
-
-    @property
-    def year(self):
-        return self.rawid[:4]
-
-    def __repr__(self):
-        return '<Term: %s %s>' % (self.season, self.year)
-
 class Course(object):
     def __init__(self, link=None, code=None, description=None, title=None,
-                 alternate=None, _type=None,
+                 alternate=None, _type=None, term=None,
                  department=None, requirements=None, instructors=None,
                  location=None, schedule=None, crn=None):
 
@@ -63,6 +43,7 @@ class Course(object):
         # The course type (eg. Lecture)
         self.type = _type
 
+        self.term = term
         self.department = department
         self.requirements = requirements or []
         self.instructors = instructors or []
@@ -149,10 +130,24 @@ class Location(CourseInfo):
 
     @property
     def id(self):
-        try:
+        if '/' in self.raw_id:
             return '/'.join([self.building, self.room])
-        except IndexError:
+        else:
             return CourseInfo.id.fget(self)
 
 class Instructor(CourseInfo):
-    pass
+    @property
+    def name(self):
+        return self.text
+
+class Term(CourseInfo):
+    @property
+    def season(self):
+        return {'90': 'fall',
+                '10': 'winter',
+                '20': 'spring'}.get(self.id[4:], 'unknown')
+
+    @property
+    def year(self):
+        return self.id[:4]
+
