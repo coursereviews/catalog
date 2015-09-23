@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
+from datetime import date, time
 from catalog.scraper import Scraper
 
 class CatalogTestCase(unittest.TestCase):
@@ -68,6 +69,29 @@ class TestSimpleCatalogCourse(CatalogTestCase):
         self.assertEqual(instructor.text, u'Holly Allen')
         self.assertEqual(instructor.href, u'http://catalog.middlebury.edu/resources/view/catalog/catalog%2FMCUG/resource/resource%2Fperson%2Feb22314a852970f29d9c828dec3265d2')
         self.assertEqual(instructor.name, u'Holly Allen')
+
+    def test_location(self):
+        self.assertEqual(self.course.location.id, u'AXN/229')
+        self.assertEqual(self.course.location.text, u'Axinn Center 229')
+        self.assertEqual(self.course.location.href, u'http://catalog.middlebury.edu/resources/view/catalog/catalog%2FMCUG/resource/resource%2Fplace%2Froom%2FAXN%2F229')
+        self.assertEqual(self.course.location.building, u'AXN')
+        self.assertEqual(self.course.location.room, u'229')
+
+    def test_schedule(self):
+        self.assertEqual(self.course.schedule.text, u'12:15pm-1:30pm on Monday, Wednesday (Sep 16, 2015 to Dec 11, 2015)')
+        self.assertEqual(len(self.course.schedule.meetings), 1)
+
+        meeting = self.course.schedule.meetings[0]
+        self.assertEqual(meeting.start_time, time(12, 15))
+        self.assertEqual(meeting.end_time, time(13, 30))
+        self.assertEqual(len(meeting.days), 2)
+        self.assertEqual(meeting.days[0], u'Monday')
+        self.assertEqual(meeting.days[1], u'Wednesday')
+        self.assertEqual(meeting.start_date, date(2015, 9, 16))
+        self.assertEqual(meeting.end_date, date(2015, 12, 11))
+
+    def test_crn(self):
+        self.assertEqual(self.course.crn.id, u'92348')
 
 if __name__ == '__main__':
     unittest.main()

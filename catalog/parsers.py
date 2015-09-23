@@ -86,7 +86,7 @@ def parse_schedule(schedule_string):
     regex = '(.+)-(.+) on (.+) (at (.+) (.+) )?\((.+) to (.+)\)'
     time_format = '%I:%M%p'
     date_format = '%b %d, %Y'
-    schedule = Schedule()
+    schedule = Schedule(text=schedule_string)
 
     for meeting_string in schedule_string.split('\n'):
         meeting = Meeting(meeting_string)
