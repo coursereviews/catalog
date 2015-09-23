@@ -20,7 +20,7 @@ def parse_catalog(catalog_dict):
     catalog = Catalog()
 
     catalog.raw = catalog_dict
-    catalog.link = catalog_dict['rss']['channel']['link']
+    catalog.href = catalog_dict['rss']['channel']['link']
 
     for course in catalog_dict['rss']['channel']['item']:
         catalog.courses.append(parse_course(course))

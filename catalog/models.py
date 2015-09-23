@@ -3,9 +3,9 @@
 from catalog.exceptions import CatalogException
 
 class Catalog(object):
-    def __init__(self, raw=None, link=None, courses=None):
+    def __init__(self, raw=None, href=None, courses=None):
         self.raw = raw
-        self.link = link
+        self.href = href
 
         self.courses = courses or []
 
@@ -14,10 +14,6 @@ class Catalog(object):
 
     def __iter__(self):
         return iter(self.courses)
-
-    @property
-    def type_ids(self):
-        return map(lambda i: i.id, self.types)
 
 class Course(object):
     def __init__(self, link=None, code=None, description=None, title=None,
@@ -60,7 +56,7 @@ class Schedule(object):
         self.meetings = meetings or []
 
     def __repr__(self):
-        return self.text
+        return '<Schedule: %s>' % self.text
 
 class Meeting(object):
     def __init__(self, raw, start_time=None, end_time=None,
