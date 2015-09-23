@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
 import requests
 import xmltodict
-
 import json
-from HTMLParser import HTMLParser
+
+try:
+    from HTMLParser import HTMLParser
+except ImportError:
+    # Python 3
+    from html.parser import HTMLParser
 
 from catalog.parsers import parse_catalog
 

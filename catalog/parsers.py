@@ -1,18 +1,20 @@
+from __future__ import unicode_literals
+from six import string_types
 import re
 from datetime import datetime
-from models import (Catalog,
-                    Course,
-                    Type,
-                    Subject,
-                    Department,
-                    Level,
-                    Requirement,
-                    Location,
-                    Instructor,
-                    Schedule,
-                    Meeting,
-                    CRN,
-                    Term)
+from catalog.models import (Catalog,
+                            Course,
+                            Type,
+                            Subject,
+                            Department,
+                            Level,
+                            Requirement,
+                            Location,
+                            Instructor,
+                            Schedule,
+                            Meeting,
+                            CRN,
+                            Term)
 
 def parse_catalog(catalog_dict):
     catalog = Catalog()
@@ -66,7 +68,7 @@ def parse_course(course_dict):
     return course
 
 def parse_course_info(topic_dict, klass):
-    if isinstance(topic_dict, str) or isinstance(topic_dict, unicode):
+    if isinstance(topic_dict, string_types):
         return klass(raw_id=topic_dict)
 
     if topic_dict == None:
