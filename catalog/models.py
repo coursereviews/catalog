@@ -3,9 +3,10 @@
 from catalog.exceptions import CatalogException
 
 class Catalog(object):
-    def __init__(self, raw=None, href=None, courses=None):
+    def __init__(self, raw=None, href=None, term=None, courses=None):
         self.raw = raw
         self.href = href
+        self.term = term
 
         self.courses = courses or []
 

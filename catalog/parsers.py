@@ -21,6 +21,7 @@ def parse_catalog(catalog_dict):
 
     catalog.raw = catalog_dict
     catalog.href = catalog_dict['rss']['channel']['link']
+    catalog.term = parse_course_info(catalog_dict['rss']['channel']['catalog:chosen_term'], Term)
 
     for course in catalog_dict['rss']['channel']['item']:
         catalog.courses.append(parse_course(course))

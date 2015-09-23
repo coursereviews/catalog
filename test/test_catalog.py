@@ -14,7 +14,19 @@ class CatalogTestCase(unittest.TestCase):
 
 class TestSimpleCatalogCourse(CatalogTestCase):
     def setUp(self):
+        self.catalog = TestSimpleCatalogCourse.catalog
         self.course = TestSimpleCatalogCourse.catalog.courses[0]
+
+    def test_catalog(self):
+        self.assertEqual(len(self.catalog), 886)
+        self.assertEqual(self.catalog.href, 'http://catalog.middlebury.edu/offerings/searchxml/catalog/catalog%2FMCUG/term/term%2F201590/level/topic%2Flevel%2FUG/type/genera%3Aoffering%2FLCT/type/genera%3Aoffering%2FLAB/type/genera%3Aoffering%2FDSC/type/genera%3Aoffering%2FPE/type/genera%3Aoffering%2FSEM/location/resource%2Fplace%2Fcampus%2FM/time_start/0/time_end/86400/search/Search')
+
+        term = self.catalog.term
+        self.assertEqual(term.id, '201590')
+        self.assertEqual(term.text, 'Fall 2015')
+        self.assertEqual(term.href, 'http://catalog.middlebury.edu/terms/view/catalog/catalog%2FMCUG/term/term%2F201590')
+        self.assertEqual(term.season, 'fall')
+        self.assertEqual(term.year, '2015')
 
     def test_title(self):
         self.assertEqual(self.course.title, 'Politics, Media, Pop. Culture')
