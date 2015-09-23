@@ -17,13 +17,13 @@ class Catalog(object):
         return iter(self.courses)
 
 class Course(object):
-    def __init__(self, link=None, code=None, description=None, title=None,
+    def __init__(self, href=None, code=None, description=None, title=None,
                  alternate=None, _type=None, term=None,
                  department=None, requirements=None, instructors=None,
                  location=None, schedule=None, crn=None):
 
-        # The Middlebury catalog link
-        self.link = link
+        # The Middlebury catalog href
+        self.href = href
 
         # The course title code (eg. AMST0102A-F15)
         self.code = code

@@ -31,8 +31,8 @@ class TestSimpleCatalogCourse(CatalogTestCase):
     def test_title(self):
         self.assertEqual(self.course.title, 'Politics, Media, Pop. Culture')
 
-    def test_link(self):
-        self.assertEqual(self.course.link, 'http://catalog.middlebury.edu/offerings/view/catalog/catalog%2FMCUG/offering/section%2F201590%2F92348')
+    def test_href(self):
+        self.assertEqual(self.course.href, 'http://catalog.middlebury.edu/offerings/view/catalog/catalog%2FMCUG/offering/section%2F201590%2F92348')
 
     def test_code(self):
         self.assertEqual(self.course.code, 'AMST0102A-F15')

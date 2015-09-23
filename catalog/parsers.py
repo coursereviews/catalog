@@ -32,7 +32,7 @@ def parse_course(course_dict):
     course = Course()
 
     course.code = course_dict.get('title')
-    course.link = course_dict.get('link')
+    course.href = course_dict.get('link')
     course.description = course_dict.get('description')
     course.title = course_dict.get('catalog:title')
 
