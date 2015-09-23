@@ -94,5 +94,35 @@ class TestSimpleCatalogCourse(CatalogTestCase):
     def test_crn(self):
         self.assertEqual(self.course.crn.id, '92348')
 
+class TestMultipleMeetingsCatalogCourse(CatalogTestCase):
+    def setUp(self):
+        self.course = TestMultipleMeetingsCatalogCourse.catalog.courses[15]
+
+    def test_meetings(self):
+        self.assertEqual(len(self.course.schedule.meetings), 2)
+
+        meeting1 = self.course.schedule.meetings[0]
+        self.assertEqual(meeting1.start_time, time(8, 0))
+        self.assertEqual(meeting1.end_time, time(9, 15))
+        self.assertEqual(len(meeting1.days), 2)
+        self.assertEqual(meeting1.days[0], 'Tuesday')
+        self.assertEqual(meeting1.days[1], 'Thursday')
+        self.assertEqual(meeting1.location.building, 'WTH')
+        self.assertEqual(meeting1.location.room, 'SEM')
+        self.assertEqual(meeting1.start_date, date(2015, 9, 16))
+        self.assertEqual(meeting1.end_date, date(2015, 12, 11))
+
+        meeting2 = self.course.schedule.meetings[1]
+        self.assertEqual(meeting2.start_time, time(11, 15))
+        self.assertEqual(meeting2.end_time, time(12, 5))
+        self.assertEqual(len(meeting2.days), 3)
+        self.assertEqual(meeting2.days[0], 'Monday')
+        self.assertEqual(meeting2.days[1], 'Wednesday')
+        self.assertEqual(meeting2.days[2], 'Friday')
+        self.assertEqual(meeting2.location.building, 'SDL')
+        self.assertEqual(meeting2.location.room, '130')
+        self.assertEqual(meeting2.start_date, date(2015, 9, 16))
+        self.assertEqual(meeting2.end_date, date(2015, 12, 11))
+
 if __name__ == '__main__':
     unittest.main()

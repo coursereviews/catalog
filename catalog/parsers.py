@@ -85,7 +85,7 @@ def parse_crn(crn_dict):
     return CRN(raw_id=crn_dict.get('catalog:value'))
 
 def parse_schedule(schedule_string):
-    regex = '(.+)-(.+) on (.+) (at (.+) (.+) )?\((.+) to (.+)\)'
+    regex = re.compile(r'(.+)-(.+) on (.+?) (at (.+) (.+) )?\((.+) to (.+)\)')
     time_format = '%I:%M%p'
     date_format = '%b %d, %Y'
     schedule = Schedule(text=schedule_string)
