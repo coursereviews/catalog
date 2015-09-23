@@ -124,5 +124,12 @@ class TestMultipleMeetingsCatalogCourse(CatalogTestCase):
         self.assertEqual(meeting2.start_date, date(2015, 9, 16))
         self.assertEqual(meeting2.end_date, date(2015, 12, 11))
 
+class TestNoBuildingRoomLocationCatalogCourse(CatalogTestCase):
+    def setUp(self):
+        self.course = TestNoBuildingRoomLocationCatalogCourse.catalog.courses[76]
+
+    def test_location(self):
+        self.assertEqual(self.course.location.id, 'Main')
+
 if __name__ == '__main__':
     unittest.main()

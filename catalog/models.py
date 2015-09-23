@@ -60,7 +60,7 @@ class Schedule(object):
         self.meetings = meetings or []
 
     def __repr__(self):
-        return '<Schedule: %s>' % '; '.join([meeting.__repr__ for meeting in self.meetings])
+        return self.text
 
 class Meeting(object):
     def __init__(self, raw, start_time=None, end_time=None,
