@@ -14,7 +14,7 @@ except ImportError:
 from catalog.parsers import parse_catalog
 
 class Scraper(object):
-    base_url = 'http://catalog.middlebury.edu/offerings/searchxml/catalog/catalog%2FMCUG?'
+    base_url = 'catalog.middlebury.edu/offerings/searchxml/catalog/catalog%2FMCUG?'
 
     def __init__(self, term):
         self.term = term
